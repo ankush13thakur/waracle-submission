@@ -1,8 +1,7 @@
 # Waracle Cake Shop
 
 ## Application Summary:
-This project exposes APIs for cake entity. To run this project you'll need docker installed in your system. You can download docker from, https://docs.docker.com/get-docker/.
-
+This project exposes APIs for cake entity. To run this project you'll need docker installed in your system. You can follow the steps here, https://docs.docker.com/desktop/windows/install/. These steps may differ based on your OS. 
 ## Steps to run this project:
 - Download/checkout this project in your system
 - Extract it (if downloaded)

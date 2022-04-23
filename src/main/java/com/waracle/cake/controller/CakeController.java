@@ -125,8 +125,8 @@ public class CakeController {
 			@ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
 			@ApiResponse(responseCode = "409", description = "Duplicate cake name", content = @Content) })
 	@PostMapping(value = "/cakes")
-	public Cake createCake(@RequestBody Cake cake) {
-		return cakeService.createCake(cake);
+	public ResponseEntity<Cake> createCake(@RequestBody Cake cake) {
+		return new ResponseEntity<>(cakeService.createCake(cake), HttpStatus.CREATED);
 	}
 
 	/**
@@ -145,9 +145,10 @@ public class CakeController {
 			@ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
 			@ApiResponse(responseCode = "409", description = "Duplicate cake name", content = @Content) })
 	@PutMapping(value = "/cakes/{cakeId}", produces = { "application/json" })
-	public Cake updateCake(@Parameter(description = "id of cake to be updated") @PathVariable int cakeId,
+	public ResponseEntity<Cake> updateCake(
+			@Parameter(description = "id of cake to be updated") @PathVariable int cakeId,
 			@Parameter(description = "cake updated information") @RequestBody Cake cake) {
-		return cakeService.updateCake(cakeId, cake);
+		return new ResponseEntity<>(cakeService.updateCake(cakeId, cake), HttpStatus.OK);
 	}
 
 	/**

@@ -8,7 +8,7 @@ public interface CakeService {
 
 	List<Cake> getAllCakes();
 
-	List<Cake> listCakes(int page, int size);
+	List<Cake> listCakes(int pageNum, int size);
 	
 	Cake getCake(int id);
 	

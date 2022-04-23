@@ -1,10 +1,13 @@
 package com.waracle.cake.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +23,17 @@ public class CakeServiceImpl implements CakeService {
 	private CakeRepository cakeRepository;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Cake> getAllCakes() {
 		return cakeRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Cake> listCakes(int page, int size) {
-		return cakeRepository.findAll(PageRequest.of(page, size, Sort.by("name").ascending())).toList();
+	public List<Cake> listCakes(int pageNum, int size) {
+		Pageable pageRequest = PageRequest.of(pageNum, size, Sort.by("name").ascending());
+		Page<Cake> page = cakeRepository.findAll(pageRequest);
+		return page.isEmpty() ? new ArrayList<Cake>() : page.toList();
 	}
 
 	@Override
